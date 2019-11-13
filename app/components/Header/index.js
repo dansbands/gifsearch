@@ -6,16 +6,21 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 // import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+
+const SiteHeader = styled.header`
+  height: 100px;
+  border-bottom: 1px solid black;
+`;
 
 function Header() {
   return (
-    <header>
+    <SiteHeader>
       <h1>GifStash</h1>
       <Link to="/">Home</Link> <Link to="/favorites">Favorites</Link>
-    </header>
+    </SiteHeader>
   );
 }
 

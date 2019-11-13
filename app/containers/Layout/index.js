@@ -1,6 +1,6 @@
 /**
  *
- * Home
+ * Layout
  *
  */
 
@@ -12,28 +12,35 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import Layout from 'containers/Layout';
-import makeSelectHome from './selectors';
+import Header from 'components/Header';
+import SiteContent from 'components/SiteContent';
+import makeSelectLayout from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 /* eslint-disable react/prefer-stateless-function */
-class Home extends React.Component {
+class Layout extends React.Component {
   render() {
+    const { children } = this.props;
     return (
-      <Layout>
-        <main>Home</main>
-      </Layout>
-    );
+      <Fragment>
+        <Header />
+        <SiteContent>{children}</SiteContent>
+      </Fragment>
+    )
   }
 }
 
-Home.propTypes = {
+Layout.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 const mapStateToProps = createStructuredSelector({
-  home: makeSelectHome(),
+  layout: makeSelectLayout(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -47,11 +54,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'home', reducer });
-const withSaga = injectSaga({ key: 'home', saga });
+const withReducer = injectReducer({ key: 'layout', reducer });
+const withSaga = injectSaga({ key: 'layout', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Home);
+)(Layout);
