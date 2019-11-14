@@ -10,7 +10,7 @@ export const initialState = {};
 
 /* eslint-disable default-case, no-param-reassign */
 function homeReducer(state = initialState, action) {
-  console.log('reducer', action);
+  // console.log('reducer', action);
   switch (action.type) {
     case GET_GIFS_SUCCESS:
       return action.payload;

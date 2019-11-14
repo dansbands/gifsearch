@@ -11,7 +11,7 @@ function* getGifs(action) {
     }`;
     const options = { method: 'GET' };
     const payload = yield fetch(url, options).then(res => res.json());
-    console.log({payload});
+    // console.log({payload});
     yield put(getGifsSuccess(payload));
   } catch (error) {
     console.log({error});
