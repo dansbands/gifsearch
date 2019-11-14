@@ -3,18 +3,20 @@
  * Home reducer
  *
  */
-import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+// import produce from 'immer';
+import { GET_GIFS_SUCCESS } from './constants';
 
 export const initialState = {};
 
 /* eslint-disable default-case, no-param-reassign */
-const homeReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
-    switch (action.type) {
-      case DEFAULT_ACTION:
-        break;
-    }
-  });
+function homeReducer(state = initialState, action) {
+  console.log('reducer', action);
+  switch (action.type) {
+    case GET_GIFS_SUCCESS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
 export default homeReducer;

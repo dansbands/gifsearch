@@ -16,20 +16,41 @@ import Layout from 'containers/Layout';
 import makeSelectHome from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { getGifs as getGifsAction } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 class Home extends React.Component {
+  state = { searchTerm: '' };
+
+  handleChange = e => {
+    this.setState({ searchTerm: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { searchTerm } = this.state;
+    this.props.getGifs(searchTerm);
+  };
+
   render() {
+    // console.log(this.state);
+    console.log(this.props);
+    const { searchTerm } = this.state;
     return (
       <Layout>
         <main>Home</main>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={searchTerm} onChange={this.handleChange} />
+          <input type="submit" />
+        </form>
       </Layout>
     );
   }
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+  getGifs: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -38,7 +59,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    getGifs: searchTerm => dispatch(getGifsAction(searchTerm)),
   };
 }
 
@@ -47,8 +68,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'home', reducer });
-const withSaga = injectSaga({ key: 'home', saga });
+const withReducer = injectReducer({ key: 'gifs', reducer });
+const withSaga = injectSaga({ key: 'gifs', saga });
 
 export default compose(
   withReducer,
