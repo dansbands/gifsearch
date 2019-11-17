@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -22,10 +22,11 @@ export function GifCard(props) {
   useInjectReducer({ key: 'gifCard', reducer });
   useInjectSaga({ key: 'gifCard', saga });
 
-  // const selected = false;
-
   const { key, src, height, width, gif, addFavorite, selected } = props;
-  console.log({selected});
+
+  const [isSelected, toggleIsSelected] = useState(false);
+
+  console.log({ selected });
   const StyledDiv = styled.div`
     position: relative;
     padding: 10px;
@@ -39,12 +40,19 @@ export function GifCard(props) {
     font-size: 50px;
   `;
 
+  const handleSelect = gifObj => {
+    addFavorite(gifObj);
+    toggleIsSelected(!isSelected);
+  };
+
   // console.log({props});
   return (
-    <StyledDiv onClick={() => addFavorite(gif)}>
+    <StyledDiv onClick={() => handleSelect(gif)}>
       <img key={key} src={src} height={height} width={width} alt="gif" />
       <StyledSpan
-        className={selected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'}
+        className={
+          isSelected || selected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'
+        }
       />
     </StyledDiv>
   );
