@@ -10,17 +10,33 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import makeSelectGifGrid from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function GifGrid() {
-  useInjectReducer({ key: 'gifGrid', reducer });
-  useInjectSaga({ key: 'gifGrid', saga });
+export function GifGrid(props) {
+  const { gifs } = props;
 
-  return <div />;
+  function renderGifs(gifsToRender) {
+    let length = 0;
+    if (gifsToRender.data) {
+      const { data } = gifsToRender;
+      console.log({ data });
+      return data.map(gif => {
+        const { images, id } = gif;
+        const { fixed_height } = images;
+        const { height, width, url } = fixed_height;
+        return (
+          <img key={id} src={url} height={height} width={width} alt="gif" />
+        );
+      });
+    }
+  }
+
+  console.log({ props });
+  return <div>{renderGifs(gifs)}</div>;
 }
 
 GifGrid.propTypes = {
@@ -42,4 +58,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(GifGrid);
+const withReducer = injectReducer({ key: 'gifGrid', reducer });
+const withSaga = injectSaga({ key: 'gifGrid', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(GifGrid);

@@ -14,6 +14,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Layout from 'containers/Layout';
 import SearchForm from 'components/SearchForm';
+import GifGrid from 'containers/GifGrid';
 import makeSelectHome from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -25,10 +26,12 @@ class Home extends React.Component {
     // console.log(this.state);
     console.log(this.props);
     const { getGifs } = this.props;
+    const { home } = this.props;
     return (
       <Layout>
         <main>Home</main>
         <SearchForm getGifs={getGifs} />
+        <GifGrid gifs={home} />
       </Layout>
     );
   }
@@ -36,6 +39,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   getGifs: PropTypes.func,
+  home: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
