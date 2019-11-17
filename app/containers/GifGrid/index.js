@@ -19,6 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 export function GifGrid(props) {
+  console.log({ props });
   const { gifs } = props;
 
   const GifGrid = styled.div`
@@ -29,7 +30,7 @@ export function GifGrid(props) {
 
   function renderGifs(gifsToRender) {
     let length = 0;
-    if (gifsToRender.data) {
+    if (gifsToRender && gifsToRender.data) {
       const { data } = gifsToRender;
       console.log({ data });
       return data.map(gif => {
@@ -45,7 +46,7 @@ export function GifGrid(props) {
   }
 
   console.log({ props });
-  return <GifGrid>{renderGifs(gifs)}</GifGrid>;
+  return <GifGrid>{renderGifs(gifs.gifList)}</GifGrid>;
 }
 
 GifGrid.propTypes = {

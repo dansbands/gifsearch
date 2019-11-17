@@ -16,8 +16,9 @@ import styled from 'styled-components';
 import makeSelectGifCard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { addFavorite as addFavoriteAction } from '../Home/actions';
 
-export function GifCard({ key, src, height, width }) {
+export function GifCard({ key, src, height, width, gif, addFavorite }) {
   useInjectReducer({ key: 'gifCard', reducer });
   useInjectSaga({ key: 'gifCard', saga });
 
@@ -37,7 +38,7 @@ export function GifCard({ key, src, height, width }) {
   `;
 
   return (
-    <StyledDiv>
+    <StyledDiv onClick={() => addFavorite(gif)}>
       <img key={key} src={src} height={height} width={width} alt="gif" />
       <StyledSpan
         className={selected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'}
@@ -47,6 +48,8 @@ export function GifCard({ key, src, height, width }) {
 }
 
 GifCard.propTypes = {
+  gif: PropTypes.object,
+  addFavorite: PropTypes.func,
   key: PropTypes.string,
   src: PropTypes.string,
   height: PropTypes.string,
@@ -59,7 +62,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    addFavorite: favorite => dispatch(addFavoriteAction(favorite))
   };
 }
 
