@@ -28,17 +28,39 @@ export function GifGrid(props) {
     flex-wrap: wrap;
   `;
 
-  function renderGifs(gifsToRender) {
-    let length = 0;
+  function checkSelected(gifs, favorites) {
+    console.log({ favorites });
+    gifs.map(gif => {
+      if (favorites.find(fav => fav.id === gif.id)) {
+        gif.selected = true
+        return gif;
+      }
+      gif.selected = false
+      return gif;
+    });
+    return gifs;
+  }
+
+  function renderGifs(gifsToRender, favorites) {
     if (gifsToRender && gifsToRender.data) {
-      const { data } = gifsToRender;
-      console.log({ data });
-      return data.map(gif => {
-        const { images, id } = gif;
+      let newData = gifsToRender.data;
+      newData = checkSelected(gifsToRender.data, favorites);
+      console.log(newData);
+      // const { data } = gifsToRender;
+      // console.log({ data });
+      return newData.map(gif => {
+        const { images, id, selected } = gif;
         const { fixed_height } = images;
         const { height, width, url } = fixed_height;
         return (
-          <GifCard key={id} src={url} height={height} width={width} gif={gif} />
+          <GifCard
+            key={id}
+            src={url}
+            height={height}
+            width={width}
+            selected={selected}
+            gif={gif}
+          />
         );
       });
     }
@@ -46,7 +68,7 @@ export function GifGrid(props) {
   }
 
   console.log({ props });
-  return <GifGrid>{renderGifs(gifs.gifList)}</GifGrid>;
+  return <GifGrid>{renderGifs(gifs.gifList, gifs.favorites)}</GifGrid>;
 }
 
 GifGrid.propTypes = {

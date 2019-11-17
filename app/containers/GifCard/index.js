@@ -18,12 +18,14 @@ import reducer from './reducer';
 import saga from './saga';
 import { addFavorite as addFavoriteAction } from '../Home/actions';
 
-export function GifCard({ key, src, height, width, gif, addFavorite }) {
+export function GifCard(props) {
   useInjectReducer({ key: 'gifCard', reducer });
   useInjectSaga({ key: 'gifCard', saga });
 
-  const selected = false;
+  // const selected = false;
 
+  const { key, src, height, width, gif, addFavorite, selected } = props;
+  console.log({selected});
   const StyledDiv = styled.div`
     position: relative;
     padding: 10px;
@@ -37,6 +39,7 @@ export function GifCard({ key, src, height, width, gif, addFavorite }) {
     font-size: 50px;
   `;
 
+  // console.log({props});
   return (
     <StyledDiv onClick={() => addFavorite(gif)}>
       <img key={key} src={src} height={height} width={width} alt="gif" />
@@ -62,7 +65,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    addFavorite: favorite => dispatch(addFavoriteAction(favorite))
+    addFavorite: favorite => dispatch(addFavoriteAction(favorite)),
   };
 }
 
