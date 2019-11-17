@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import styled from 'styled-components';
+import GifCard from 'containers/GifCard';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectGifGrid from './selectors';
@@ -18,6 +20,12 @@ import saga from './saga';
 
 export function GifGrid(props) {
   const { gifs } = props;
+
+  const GifGrid = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  `;
 
   function renderGifs(gifsToRender) {
     let length = 0;
@@ -29,14 +37,15 @@ export function GifGrid(props) {
         const { fixed_height } = images;
         const { height, width, url } = fixed_height;
         return (
-          <img key={id} src={url} height={height} width={width} alt="gif" />
+          <GifCard key={id} src={url} height={height} width={width} gif={gif} />
         );
       });
     }
+    return null;
   }
 
   console.log({ props });
-  return <div>{renderGifs(gifs)}</div>;
+  return <GifGrid>{renderGifs(gifs)}</GifGrid>;
 }
 
 GifGrid.propTypes = {
