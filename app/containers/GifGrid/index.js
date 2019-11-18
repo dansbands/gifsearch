@@ -20,7 +20,7 @@ import saga from './saga';
 
 export function GifGrid(props) {
   console.log({ props });
-  const { gifs } = props;
+  const { gifs, isFullSearch } = props;
 
   const GifGrid = styled.div`
     display: flex;
@@ -29,23 +29,25 @@ export function GifGrid(props) {
   `;
 
   function checkSelected(gifs, favorites) {
-    console.log({ favorites });
+    // console.log({ favorites });
     gifs.map(gif => {
       if (favorites.find(fav => fav.id === gif.id)) {
-        gif.selected = true
+        gif.selected = true;
         return gif;
       }
-      gif.selected = false
+      gif.selected = false;
       return gif;
     });
     return gifs;
   }
 
   function renderGifs(gifsToRender, favorites) {
+    // console.log({ gifsToRender });
     if (gifsToRender && gifsToRender.data) {
       let newData = gifsToRender.data;
       newData = checkSelected(gifsToRender.data, favorites);
-      console.log(newData);
+
+      // console.log(newData);
       // const { data } = gifsToRender;
       // console.log({ data });
       return newData.map(gif => {
@@ -67,8 +69,47 @@ export function GifGrid(props) {
     return null;
   }
 
-  console.log({ props });
-  return <GifGrid>{renderGifs(gifs.gifList, gifs.favorites)}</GifGrid>;
+  function renderFavorites(gifsToRender) {
+    const newData = [];
+
+    gifsToRender.forEach(gif => {
+      if (!newData.length) {
+        newData.push(gif)
+      }
+      const stringyData = JSON.stringify(newData)
+      const stringyGif = JSON.stringify(gif)
+      if (!stringyData.includes(stringyGif)) {
+        newData.push(gif)
+      }
+      // newData.forEach(item => {
+      //   if (item.id !== gif.id) {
+      //     newData.push(gif)
+      //   }
+      // })
+    });
+    console.log({ newData });
+    return newData.map(gif => {
+      const { images, id, selected } = gif;
+      const { fixed_height } = images;
+      const { height, width, url } = fixed_height;
+      return (
+        <GifCard
+          key={id}
+          src={url}
+          height={height}
+          width={width}
+          selected={selected}
+          gif={gif}
+        />
+      );
+    });
+  }
+
+  // console.log({ props });
+  if (isFullSearch) {
+    return <GifGrid>{renderGifs(gifs.gifList, gifs.favorites)}</GifGrid>;
+  }
+  return <GifGrid>{renderFavorites(gifs.favorites)}</GifGrid>;
 }
 
 GifGrid.propTypes = {

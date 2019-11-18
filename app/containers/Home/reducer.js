@@ -10,8 +10,8 @@ export const initialState = { favorites: [], gifList: {} };
 
 /* eslint-disable default-case, no-param-reassign */
 function homeReducer(state = initialState, action) {
-  console.log('reducer', action);
-  console.log({ state });
+  // console.log('reducer', action);
+  // console.log({ state });
   switch (action.type) {
     case GET_GIFS_SUCCESS:
       return { ...state, gifList: action.payload };

@@ -26,7 +26,6 @@ export function GifCard(props) {
 
   const [isSelected, toggleIsSelected] = useState(false);
 
-  console.log({ selected });
   const StyledDiv = styled.div`
     position: relative;
     padding: 10px;

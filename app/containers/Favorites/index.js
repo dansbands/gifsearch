@@ -12,34 +12,46 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import Header from 'components/Header';
+import Layout from 'containers/Layout';
+import SearchForm from 'components/SearchForm';
+import GifGrid from 'containers/GifGrid';
 import makeSelectFavorites from './selectors';
-import reducer from './reducer';
-import saga from './saga';
+import makeSelectHome from '../Home/selectors';
+import reducer from '../Home/reducer';
+import saga from '../Home/saga';
+import { getGifs as getGifsAction } from '../Home/actions';
 
 /* eslint-disable react/prefer-stateless-function */
 class Favorites extends React.Component {
   render() {
+    console.log(this.props);
+    const { getGifs } = this.props;
+    const { home, favorites } = this.props;
     return (
-      <Fragment>
-        <Header />
+      <Layout>
         <main>Favorites</main>
-      </Fragment>
+        {/*
+          <SearchForm getGifs={getGifs} />
+          */}
+        <GifGrid gifs={favorites} />
+      </Layout>
     );
   }
 }
 
 Favorites.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  getGifs: PropTypes.func,
+  home: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   favorites: makeSelectFavorites(),
+  home: makeSelectHome(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    getGifs: searchTerm => dispatch(getGifsAction(searchTerm)),
   };
 }
 

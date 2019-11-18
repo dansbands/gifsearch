@@ -36,7 +36,7 @@ export function getGifsFailure(error) {
 }
 
 export function addFavorite(favorite) {
-  console.log({favorite});
+  // console.log({favorite});
   return {
     type: ADD_FAVORITE_START,
     payload: favorite,
