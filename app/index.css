@@ -1,0 +1,10 @@
+body,
+header,
+main {
+  background: black;
+  color: white;
+}
+
+a {
+  color: white;
+}

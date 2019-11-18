@@ -28,14 +28,14 @@ export function GifCard(props) {
 
   const StyledDiv = styled.div`
     position: relative;
-    padding: 10px;
-    border: 1px solid lightgrey;
+    padding: 20px;
+    // border: 1px solid lightgrey;
     color: white;
   `;
 
   const StyledSpan = styled.span`
     position: absolute;
-    right: 10px;
+    right: 25px;
     font-size: 50px;
   `;
 

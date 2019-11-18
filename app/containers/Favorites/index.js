@@ -13,7 +13,6 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Layout from 'containers/Layout';
-import SearchForm from 'components/SearchForm';
 import GifGrid from 'containers/GifGrid';
 import makeSelectFavorites from './selectors';
 import makeSelectHome from '../Home/selectors';
