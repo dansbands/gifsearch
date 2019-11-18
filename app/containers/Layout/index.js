@@ -21,18 +21,18 @@ import saga from './saga';
 /* eslint-disable react/prefer-stateless-function */
 class Layout extends React.Component {
   render() {
-    const { children } = this.props;
+    const { className, children } = this.props;
     return (
       <Fragment>
         <Header />
-        <SiteContent>{children}</SiteContent>
+        <SiteContent className={className}>{children}</SiteContent>
       </Fragment>
-    )
+    );
   }
 }
 
 Layout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

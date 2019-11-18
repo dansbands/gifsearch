@@ -8,3 +8,9 @@ main {
 a {
   color: white;
 }
+
+.main-container {
+  height: 95vh;
+  background: rgb(50,50,50);
+  padding: 20px 50px;
+}
