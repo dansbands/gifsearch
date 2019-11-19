@@ -19,13 +19,21 @@ import reducer from './reducer';
 import saga from './saga';
 
 export function GifGrid(props) {
-  console.log({ props });
   const { gifs, isFullSearch } = props;
+  console.log({ gifs });
 
   const GifGrid = styled.div`
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    @media (min-width: 375px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: space-between;
+      justify-content: space-between;
+    }
   `;
 
   function checkSelected(gifs, favorites) {

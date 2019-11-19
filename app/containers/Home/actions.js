@@ -11,6 +11,9 @@ import {
   ADD_FAVORITE_START,
   ADD_FAVORITE_SUCCESS,
   ADD_FAVORITE_FAILURE,
+  REMOVE_FAVORITE_START,
+  REMOVE_FAVORITE_SUCCESS,
+  REMOVE_FAVORITE_FAILURE,
 } from './constants';
 
 export function getGifs(searchString) {
@@ -53,6 +56,28 @@ export function addFavoriteSuccess(payload) {
 export function addFavoriteFailure(error) {
   return {
     type: ADD_FAVORITE_FAILURE,
+    error,
+  };
+}
+
+export function removeFavorite(favorite) {
+  // console.log({favorite});
+  return {
+    type: REMOVE_FAVORITE_START,
+    payload: favorite,
+  };
+}
+
+export function removeFavoriteSuccess(payload) {
+  return {
+    type: REMOVE_FAVORITE_SUCCESS,
+    payload,
+  };
+}
+
+export function removeFavoriteFailure(error) {
+  return {
+    type: REMOVE_FAVORITE_FAILURE,
     error,
   };
 }

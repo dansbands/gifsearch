@@ -16,21 +16,36 @@ import styled from 'styled-components';
 import makeSelectGifCard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { addFavorite as addFavoriteAction } from '../Home/actions';
+import {
+  addFavorite as addFavoriteAction,
+  removeFavorite as removeFavoriteAction,
+} from '../Home/actions';
 
 export function GifCard(props) {
   useInjectReducer({ key: 'gifCard', reducer });
   useInjectSaga({ key: 'gifCard', saga });
 
-  const { key, src, height, width, gif, addFavorite, selected } = props;
+  const {
+    key,
+    src,
+    height,
+    width,
+    gif,
+    addFavorite,
+    removeFavorite,
+    selected,
+  } = props;
 
-  const [isSelected, toggleIsSelected] = useState(false);
+  const [isSelected, toggleIsSelected] = useState(false || selected);
 
   const StyledDiv = styled.div`
     position: relative;
     padding: 20px;
-    // border: 1px solid lightgrey;
+    border: 1px solid lightgrey;
     color: white;
+    @media (min-width: 375px) {
+      margin: 0 auto;
+    }
   `;
 
   const StyledSpan = styled.span`
@@ -39,14 +54,18 @@ export function GifCard(props) {
     font-size: 50px;
   `;
 
-  const handleSelect = gifObj => {
-    addFavorite(gifObj);
+  const handleClick = gifObj => {
+    if (isSelected) {
+      removeFavorite(gifObj);
+    } else {
+      addFavorite(gifObj);
+    }
     toggleIsSelected(!isSelected);
   };
 
   // console.log({props});
   return (
-    <StyledDiv onClick={() => handleSelect(gif)}>
+    <StyledDiv onClick={() => handleClick(gif)}>
       <img key={key} src={src} height={height} width={width} alt="gif" />
       <StyledSpan
         className={
@@ -73,6 +92,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     addFavorite: favorite => dispatch(addFavoriteAction(favorite)),
+    removeFavorite: favorite => dispatch(removeFavoriteAction(favorite)),
   };
 }
 
