@@ -28,7 +28,6 @@ class Home extends React.Component {
     const { getGifs, home } = this.props;
     return (
       <Layout className="main-container">
-        <h3>Home</h3>
         <SearchForm getGifs={getGifs} />
         <GifGrid gifs={home} isFullSearch />
       </Layout>

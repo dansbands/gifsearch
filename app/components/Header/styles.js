@@ -20,15 +20,21 @@ export const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 20px;
+  @media (min-width: 425px) {
+    margin-left: 50px;
+  }
 `;
 
 export const StyledH1 = styled.h1`
-  font-size: 50px;
+  font-size: 30px;
   letter-spacing: 3px;
   background: -webkit-linear-gradient(#3f9bff, #c03db5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (min-width: 425px) {
+    font-size: 50px;
+  }
 `;
 
 export const StyledText = styled.span`
@@ -40,5 +46,4 @@ export const StyledText = styled.span`
 export const HeaderRight = styled.div`
   display: flex;
   justify-content: right;
-  /* border: 1px solid lightgrey; */
 `;

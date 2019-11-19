@@ -12,7 +12,7 @@ import {
   StyledDiv,
   StyledH1,
   StyledText,
-  HeaderRight
+  HeaderRight,
 } from './styles';
 
 // import PropTypes from 'prop-types';

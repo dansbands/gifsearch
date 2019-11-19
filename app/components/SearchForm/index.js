@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import { StyledForm, StyledInput, StyledButton } from './styles'
 
 class SearchForm extends React.Component {
   state = { searchTerm: '' };
@@ -24,10 +24,16 @@ class SearchForm extends React.Component {
   render() {
     const { searchTerm } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={searchTerm} onChange={this.handleChange} />
-        <input type="submit" />
-      </form>
+      <StyledForm className="example" onSubmit={this.handleSubmit}>
+        <StyledInput
+          type="text"
+          value={searchTerm}
+          onChange={this.handleChange}
+        />
+        <StyledButton type="submit">
+          <i className="fa fa-search" />
+        </StyledButton>
+      </StyledForm>
     );
   }
 }
