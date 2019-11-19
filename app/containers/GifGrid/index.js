@@ -9,36 +9,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 
-import styled from 'styled-components';
 import GifCard from 'containers/GifCard';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectGifGrid from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { StyledGrid, StyledDiv, StyledButton } from './styles';
 
+/* eslint-disable no-param-reassign, camelcase */
 export function GifGrid(props) {
   const { gifs, isFullSearch } = props;
-  // console.log({ gifs });
 
-  const GifGrid = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    @media (min-width: 425px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: space-between;
-    }
-  `;
-
-  function checkSelected(gifs, favorites) {
-    // console.log({ favorites });
-    gifs.map(gif => {
+  function checkSelected(gifsToRender, favorites) {
+    gifsToRender.map(gif => {
       if (favorites.find(fav => fav.id === gif.id)) {
         gif.selected = true;
         return gif;
@@ -46,18 +32,14 @@ export function GifGrid(props) {
       gif.selected = false;
       return gif;
     });
-    return gifs;
+    return gifsToRender;
   }
 
   function renderGifs(gifsToRender, favorites) {
-    // console.log({ gifsToRender });
     if (gifsToRender && gifsToRender.data) {
       let newData = gifsToRender.data;
       newData = checkSelected(gifsToRender.data, favorites);
 
-      // console.log(newData);
-      // const { data } = gifsToRender;
-      // console.log({ data });
       return newData.map(gif => {
         const { images, id, selected } = gif;
         const { fixed_height } = images;
@@ -89,39 +71,44 @@ export function GifGrid(props) {
       if (!stringyData.includes(stringyGif)) {
         newData.push(gif);
       }
-      // newData.forEach(item => {
-      //   if (item.id !== gif.id) {
-      //     newData.push(gif)
-      //   }
-      // })
     });
-    console.log({ newData });
-    return newData.map(gif => {
-      const { images, id, selected } = gif;
-      const { fixed_height } = images;
-      const { height, width, url } = fixed_height;
-      return (
-        <GifCard
-          key={id}
-          src={url}
-          height={height}
-          width={width}
-          selected={selected}
-          gif={gif}
-        />
-      );
-    });
+
+    return newData.length ? (
+      newData.map(gif => {
+        const { images, id, selected } = gif;
+        const { fixed_height } = images;
+        const { height, width, url } = fixed_height;
+        return (
+          <GifCard
+            key={id}
+            src={url}
+            height={height}
+            width={width}
+            selected={selected}
+            gif={gif}
+          />
+        );
+      })
+    ) : (
+      <StyledDiv>
+        <span>No Favorites Yet!</span>
+        <br />
+        <StyledButton type="button">
+          <Link to="/">Search for Gifs</Link>
+        </StyledButton>
+      </StyledDiv>
+    );
   }
 
-  // console.log({ props });
   if (isFullSearch) {
-    return <GifGrid>{renderGifs(gifs.gifList, gifs.favorites)}</GifGrid>;
+    return <StyledGrid>{renderGifs(gifs.gifList, gifs.favorites)}</StyledGrid>;
   }
-  return <GifGrid>{renderFavorites(gifs.favorites)}</GifGrid>;
+  return <StyledGrid>{renderFavorites(gifs.favorites)}</StyledGrid>;
 }
 
 GifGrid.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  gifs: PropTypes.object,
+  isFullSearch: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

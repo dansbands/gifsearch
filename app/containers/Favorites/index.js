@@ -23,8 +23,7 @@ import { getGifs as getGifsAction } from '../Home/actions';
 /* eslint-disable react/prefer-stateless-function */
 class Favorites extends React.Component {
   render() {
-    // console.log(this.props);
-    const { getGifs, home, favorites, location } = this.props;
+    const { favorites, location } = this.props;
     return (
       <Layout className="main-container" location={location}>
         <GifGrid gifs={favorites} />
@@ -34,8 +33,8 @@ class Favorites extends React.Component {
 }
 
 Favorites.propTypes = {
-  getGifs: PropTypes.func,
-  home: PropTypes.object,
+  favorites: PropTypes.array,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

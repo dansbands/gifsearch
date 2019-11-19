@@ -12,24 +12,19 @@ import {
 
 export const initialState = { favorites: [], gifList: {} };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, no-case-declarations */
 function homeReducer(state = initialState, action) {
-  // console.log('reducer', action);
-  // console.log({ state });
   switch (action.type) {
     case GET_GIFS_SUCCESS:
       return { ...state, gifList: action.payload };
     case ADD_FAVORITE_SUCCESS:
       state.favorites.push(action.payload);
-      console.log("favorites +", state.favorites );
       return state;
     case REMOVE_FAVORITE_SUCCESS:
       const newState = state.favorites.filter(
         item => item.id !== action.payload.id,
       );
-      state = { ...state, favorites: newState }
-      console.log("favorites -", state.favorites );
-
+      state = { ...state, favorites: newState };
       return state;
     default:
       return state;

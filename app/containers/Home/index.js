@@ -23,8 +23,6 @@ import { getGifs as getGifsAction } from './actions';
 /* eslint-disable react/prefer-stateless-function */
 class Home extends React.Component {
   render() {
-    // console.log(this.state);
-    console.log(this.props);
     const { getGifs, home, location } = this.props;
     return (
       <Layout className="main-container" location={location}>
@@ -38,6 +36,7 @@ class Home extends React.Component {
 Home.propTypes = {
   getGifs: PropTypes.func,
   home: PropTypes.object,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

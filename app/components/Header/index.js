@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {
@@ -16,13 +17,10 @@ import {
   HeaderRight,
 } from './styles';
 
-// import PropTypes from 'prop-types';
-
 function Header(props) {
   const {
     location: { pathname },
   } = props;
-  console.log({ pathname });
 
   const StyledDivOne = styled.div`
     display: flex;
@@ -72,6 +70,8 @@ function Header(props) {
   );
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  location: PropTypes.object,
+};
 
 export default Header;

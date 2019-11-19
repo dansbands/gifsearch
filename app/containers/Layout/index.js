@@ -21,7 +21,6 @@ import saga from './saga';
 /* eslint-disable react/prefer-stateless-function */
 class Layout extends React.Component {
   render() {
-    // console.log('Layout', this.props);
     const { className, children, location } = this.props;
     return (
       <Fragment>
@@ -38,6 +37,7 @@ Layout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -17,7 +17,6 @@ import {
 } from './constants';
 
 export function getGifs(searchString) {
-  // console.log({searchString});
   return {
     type: GET_GIFS_START,
     payload: searchString,
@@ -39,7 +38,6 @@ export function getGifsFailure(error) {
 }
 
 export function addFavorite(favorite) {
-  // console.log({favorite});
   return {
     type: ADD_FAVORITE_START,
     payload: favorite,
@@ -61,7 +59,6 @@ export function addFavoriteFailure(error) {
 }
 
 export function removeFavorite(favorite) {
-  // console.log({favorite});
   return {
     type: REMOVE_FAVORITE_START,
     payload: favorite,
