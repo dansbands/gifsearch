@@ -1,9 +1,9 @@
 body,
-header,
 main {
-  background: black;
   color: white;
+  background: rgb(50,50,50);
   font-family: 'Alata', sans-serif;
+  min-height: 100vh;
 }
 
 a {
@@ -18,6 +18,9 @@ a {
 }
 
 header {
+  font-family: 'Alata', sans-serif;
+  background: black;
+  color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;

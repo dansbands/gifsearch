@@ -27,8 +27,8 @@ class Favorites extends React.Component {
     const { getGifs } = this.props;
     const { home, favorites } = this.props;
     return (
-      <Layout>
-        <main>Favorites</main>
+      <Layout className="main-container" >
+        <h3>Favorites</h3>
         {/*
           <SearchForm getGifs={getGifs} />
           */}
