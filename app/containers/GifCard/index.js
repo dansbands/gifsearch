@@ -36,12 +36,12 @@ export function GifCard(props) {
     selected,
   } = props;
 
-  const [isSelected, toggleIsSelected] = useState(false || selected);
+  const [isSelected, toggleIsSelected] = useState(selected);
 
   const StyledDiv = styled.div`
     position: relative;
     padding: 20px;
-    border: 1px solid lightgrey;
+    // border: 1px solid lightgrey;
     color: white;
     @media (min-width: 375px) {
       margin: 0 auto;
@@ -56,8 +56,10 @@ export function GifCard(props) {
 
   const handleClick = gifObj => {
     if (isSelected) {
+      gifObj.selected = false;
       removeFavorite(gifObj);
     } else {
+      gifObj.selected = true;
       addFavorite(gifObj);
     }
     toggleIsSelected(!isSelected);
@@ -69,7 +71,7 @@ export function GifCard(props) {
       <img key={key} src={src} height={height} width={width} alt="gif" />
       <StyledSpan
         className={
-          isSelected || selected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'
+          isSelected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'
         }
       />
     </StyledDiv>

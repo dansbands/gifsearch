@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -25,8 +25,7 @@ class Home extends React.Component {
   render() {
     // console.log(this.state);
     // console.log(this.props);
-    const { getGifs } = this.props;
-    const { home } = this.props;
+    const { getGifs, home } = this.props;
     return (
       <Layout className="main-container">
         <h3>Home</h3>
