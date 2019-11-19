@@ -6,10 +6,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import {
   SiteHeader,
   StyledSpan,
-  StyledDiv,
   StyledH1,
   StyledText,
   HeaderRight,
@@ -17,7 +18,36 @@ import {
 
 // import PropTypes from 'prop-types';
 
-function Header() {
+function Header(props) {
+  const {
+    location: { pathname },
+  } = props;
+  console.log({ pathname });
+
+  const StyledDivOne = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    border-bottom: ${pathname === '/' ? '3px solid #3f9bff' : 'none'};
+    padding: 10px 0;
+    @media (min-width: 425px) {
+      margin-left: 50px;
+    }
+  `;
+
+  const StyledDivTwo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    border-bottom: ${pathname === '/favorites' ? '3px solid #3f9bff' : 'none'};
+    padding: 10px 0;
+    @media (min-width: 425px) {
+      margin-left: 50px;
+    }
+  `;
+
   return (
     <SiteHeader>
       <Link to="/">
@@ -26,16 +56,16 @@ function Header() {
 
       <HeaderRight>
         <Link to="/">
-          <StyledDiv>
+          <StyledDivOne>
             <StyledSpan className="mdi mdi-home" />
             <StyledText>Home</StyledText>
-          </StyledDiv>
+          </StyledDivOne>
         </Link>{' '}
         <Link to="/favorites">
-          <StyledDiv>
+          <StyledDivTwo>
             <StyledSpan className="mdi mdi-heart" />
             <StyledText>Favorites</StyledText>
-          </StyledDiv>
+          </StyledDivTwo>
         </Link>
       </HeaderRight>
     </SiteHeader>

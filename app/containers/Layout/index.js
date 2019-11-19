@@ -21,10 +21,11 @@ import saga from './saga';
 /* eslint-disable react/prefer-stateless-function */
 class Layout extends React.Component {
   render() {
-    const { className, children } = this.props;
+    // console.log('Layout', this.props);
+    const { className, children, location } = this.props;
     return (
       <Fragment>
-        <Header />
+        <Header location={location} />
         <SiteContent className={className}>{children}</SiteContent>
       </Fragment>
     );

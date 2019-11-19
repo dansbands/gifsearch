@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -23,15 +23,10 @@ import { getGifs as getGifsAction } from '../Home/actions';
 /* eslint-disable react/prefer-stateless-function */
 class Favorites extends React.Component {
   render() {
-    console.log(this.props);
-    const { getGifs } = this.props;
-    const { home, favorites } = this.props;
+    // console.log(this.props);
+    const { getGifs, home, favorites, location } = this.props;
     return (
-      <Layout className="main-container">
-        <h3>Favorites</h3>
-        {/*
-          <SearchForm getGifs={getGifs} />
-          */}
+      <Layout className="main-container" location={location}>
         <GifGrid gifs={favorites} />
       </Layout>
     );

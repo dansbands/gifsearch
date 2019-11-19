@@ -24,10 +24,10 @@ import { getGifs as getGifsAction } from './actions';
 class Home extends React.Component {
   render() {
     // console.log(this.state);
-    // console.log(this.props);
-    const { getGifs, home } = this.props;
+    console.log(this.props);
+    const { getGifs, home, location } = this.props;
     return (
-      <Layout className="main-container">
+      <Layout className="main-container" location={location}>
         <SearchForm getGifs={getGifs} />
         <GifGrid gifs={home} isFullSearch />
       </Layout>

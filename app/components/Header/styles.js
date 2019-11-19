@@ -16,16 +16,6 @@ export const StyledSpan = styled.span`
   font-size: 30px;
 `;
 
-export const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 20px;
-  @media (min-width: 425px) {
-    margin-left: 50px;
-  }
-`;
-
 export const StyledH1 = styled.h1`
   font-size: 30px;
   letter-spacing: 3px;

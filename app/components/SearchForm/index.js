@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledForm, StyledInput, StyledButton } from './styles'
+import { StyledForm, StyledInput, StyledButton } from './styles';
 
 class SearchForm extends React.Component {
   state = { searchTerm: '' };

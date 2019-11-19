@@ -67,16 +67,14 @@ export function GifCard(props) {
 
   const screenWidth = screen.width;
 
-  const gifWidth = screenWidth < 425 ? screenWidth * .8 : width;
+  const gifWidth = screenWidth < 425 ? screenWidth * 0.8 : width;
   const gifHeight = screenWidth < 425 ? null : height;
-  // console.log({screenWidth});
+
   return (
     <StyledDiv onClick={() => handleClick(gif)}>
       <img key={key} src={src} height={gifHeight} width={gifWidth} alt="gif" />
       <StyledSpan
-        className={
-          isSelected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'
-        }
+        className={isSelected ? 'mdi mdi-heart' : 'mdi mdi-heart-outline'}
       />
     </StyledDiv>
   );

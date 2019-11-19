@@ -20,7 +20,7 @@ import saga from './saga';
 
 export function GifGrid(props) {
   const { gifs, isFullSearch } = props;
-  console.log({ gifs });
+  // console.log({ gifs });
 
   const GifGrid = styled.div`
     display: flex;
