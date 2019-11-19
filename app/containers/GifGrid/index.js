@@ -28,11 +28,11 @@ export function GifGrid(props) {
     align-items: center;
     justify-content: center;
     text-align: center;
-    @media (min-width: 375px) {
+    @media (min-width: 425px) {
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: space-between;
       justify-content: space-between;
+      align-items: space-between;
     }
   `;
 
@@ -82,12 +82,12 @@ export function GifGrid(props) {
 
     gifsToRender.forEach(gif => {
       if (!newData.length) {
-        newData.push(gif)
+        newData.push(gif);
       }
-      const stringyData = JSON.stringify(newData)
-      const stringyGif = JSON.stringify(gif)
+      const stringyData = JSON.stringify(newData);
+      const stringyGif = JSON.stringify(gif);
       if (!stringyData.includes(stringyGif)) {
-        newData.push(gif)
+        newData.push(gif);
       }
       // newData.forEach(item => {
       //   if (item.id !== gif.id) {
