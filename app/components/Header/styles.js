@@ -20,6 +20,7 @@ export const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 50px;
 `;
 
 export const StyledH1 = styled.h1`
@@ -34,4 +35,10 @@ export const StyledText = styled.span`
   @media (max-width: 425px) {
     display: none;
   }
+`;
+
+export const HeaderRight = styled.div`
+  display: flex;
+  justify-content: right;
+  /* border: 1px solid lightgrey; */
 `;
